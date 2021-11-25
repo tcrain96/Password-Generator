@@ -1,11 +1,11 @@
 // Assignment code here
 var passwordInfo = {
   length:"0",
+  lowercase:"true",
   setLength(){
 
     //loop until input is either canceled or correctly inputed
     while(true){
-      
       var tempLength = window.prompt("Please input the length of password you wish to generate");
 
       //if user pressed cancel
@@ -19,12 +19,47 @@ var passwordInfo = {
       else if((!isNaN(parseInt(tempLength))) && parseInt(tempLength) >= 8 && parseInt(tempLength) <=128){
         //set length of password to length inputed
         this.length = tempLength;
+        return;
       }
 
       //tell user their input was invalid, and ask if they wish to try again. If yes, return to top, if cancel, set length to null.
       else{
         if(!window.confirm("Please input a number between 1 and 128")){
           this.length = null;
+          return;
+        }
+      }
+    }
+  },
+  setLowercase(){
+    //loop until input is either canceled or correctly inputed
+    while(true){
+      
+      var tempLowerCase = window.prompt("Do you wish to include lowercase letters in your password? Yes or No?");
+
+      //if user pressed cancel
+      if(tempLowerCase === null){
+        //set length to null
+        this.lowercase = null;
+        return;
+      }
+
+      //else if user said yes
+      else if (tempLowerCase.toLowerCase() === "yes"){
+        //set lowercase to true
+        this.lowercase = true;
+        return;
+      }
+      //else if user said no
+      else if (tempLowerCase.toLowerCase() === "no"){
+        //set lowercase to false
+        this.lowercase = false;
+        return;
+      }
+      //else the user did not enter a valid answer
+      else{
+        if(!window.confirm("Please answer with a yes or no.")){
+          this.lowercase = null;
           return;
         }
       }
@@ -36,12 +71,15 @@ function generatePassword(){
   var password;
 
   passwordInfo.setLength();
-
   if(passwordInfo.length === null){
-    password = "Password generation has been canceled";
+    return password = "Password generation has been canceled";
   }
 
-  return password; 
+  passwordInfo.setLowercase();
+  if(passwordInfo.lowercase === null){
+    return password = "Password generation has been canceled";
+  }
+
 }
 
 // Get references to the #generate element
