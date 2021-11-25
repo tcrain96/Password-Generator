@@ -24,7 +24,7 @@ var passwordInfo = {
 
       //tell user their input was invalid, and ask if they wish to try again. If yes, return to top, if cancel, set length to null.
       else{
-        if(!window.confirm("Please input a number between 1 and 128")){
+        if(!window.confirm("Please input a number between 8 and 128")){
           this.length = null;
           return;
         }
@@ -79,6 +79,8 @@ function generatePassword(){
   if(passwordInfo.lowercase === null){
     return password = "Password generation has been canceled";
   }
+
+  return password;
 
 }
 
