@@ -1,10 +1,10 @@
 // Assignment code here
 var passwordInfo = {
   length:"0",
-  lowercase:"true",
-  uppercase:"true",
-  numeric:"true",
-  specialCharacters ="true",
+  lowercase:true,
+  uppercase:true,
+  numeric:true,
+  specialCharacters:true,
   setLength(){
 
     //loop until input is either canceled or correctly inputed
@@ -174,34 +174,44 @@ var passwordInfo = {
 
 function generatePassword(){
   var password;
+  var promptValidated = false;
+  debugger;
+  while(promptValidated === false)
+  {
+    passwordInfo.setLength();
+    if(passwordInfo.length === null){
+      return password = "Password generation has been canceled";
+    }
 
-  passwordInfo.setLength();
-  if(passwordInfo.length === null){
-    return password = "Password generation has been canceled";
+    passwordInfo.setLowercase();
+    if(passwordInfo.lowercase === null){
+      return password = "Password generation has been canceled";
+    }
+
+    passwordInfo.setUppercase();
+    if(passwordInfo.uppercase === null){
+      return password = "Password generation has been canceled";
+    }
+
+    passwordInfo.setNumeric();
+    if(passwordInfo.numeric === null){
+      return password = "Password generation has been canceled";
+    }
+
+    passwordInfo.setSpecialCharacters();
+    if(passwordInfo.specialCharacters === null){
+      return password = "Password generation has been canceled";
+    }
+
+    if(passwordInfo.lowercase === false && passwordInfo.uppercase === false && passwordInfo.numeric === false && passwordInfo.specialCharacters === false){
+      window.alert("You must say yes to at least one prompt to generate password. Please try again!");
+    }
+    else{
+      promptValidated = true;
+    }
   }
-
-  passwordInfo.setLowercase();
-  if(passwordInfo.lowercase === null){
-    return password = "Password generation has been canceled";
-  }
-
-  passwordInfo.setUppercase();
-  if(passwordInfo.uppercase === null){
-    return password = "Password generation has been canceled";
-  }
-
-  passwordInfo.setNumeric();
-  if(passwordInfo.numeric === null){
-    return password = "Password generation has been canceled";
-  }
-
-  passwordInfo.setSpecialCharacters();
-  if(passwordInfo.specialCharacters === null){
-    return password = "Password generation has been canceled";
-  }
-
+  
   return password;
-
 }
 
 // Get references to the #generate element
