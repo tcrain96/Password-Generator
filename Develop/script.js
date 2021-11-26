@@ -172,10 +172,41 @@ var passwordInfo = {
   }
 }
 
+function randomizePassword(){
+  
+  debugger;
+  var passwordCharacters = [];
+  var randomizedPassword = null;
+  if(passwordInfo.lowercase){
+    passwordCharacters.push("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z");
+  }
+  if(passwordInfo.uppercase){
+    passwordCharacters.push("A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z");
+  }
+  if(passwordInfo.numeric){
+    passwordCharacters.push("0","1","2","3","4","5","6","7","8","9");
+  }
+  if(passwordInfo.specialCharacters){
+    passwordCharacters.push("!","#","$","%","&","'","(",")","*","+","-",".","/",":",";","<","=",">","?","@","[","]","^","_","`","{","|","}","~");
+  }
+
+  for(var i = 0; i < passwordInfo.length; i++){
+    if(randomizedPassword === null)
+    {
+      randomizedPassword = passwordCharacters[Math.floor(Math.random() * passwordCharacters.length)]
+    }
+    else{
+      randomizedPassword += passwordCharacters[Math.floor(Math.random() * passwordCharacters.length)]
+    }
+    console.log(Math.floor(Math.random() * passwordCharacters.length));
+  }
+
+  return randomizedPassword;
+}
+
 function generatePassword(){
   var password;
   var promptValidated = false;
-  debugger;
   while(promptValidated === false)
   {
     passwordInfo.setLength();
@@ -210,7 +241,7 @@ function generatePassword(){
       promptValidated = true;
     }
   }
-  
+  password = randomizePassword();
   return password;
 }
 
