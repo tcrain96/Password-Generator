@@ -2,6 +2,7 @@
 var passwordInfo = {
   length:"0",
   lowercase:"true",
+  uppercase:"true",
   setLength(){
 
     //loop until input is either canceled or correctly inputed
@@ -64,6 +65,40 @@ var passwordInfo = {
         }
       }
     }
+  },
+  setUppercase(){
+    //loop until input is either canceled or correctly inputed
+    while(true){
+      
+      var tempUpperCase = window.prompt("Do you wish to include uppercase letters in your password? Yes or No?");
+
+      //if user pressed cancel
+      if(tempUpperCase === null){
+        //set length to null
+        this.uppercase = null;
+        return;
+      }
+
+      //else if user said yes
+      else if (tempUpperCase.toLowerCase() === "yes"){
+        //set lowercase to true
+        this.uppercase = true;
+        return;
+      }
+      //else if user said no
+      else if (tempUpperCase.toLowerCase() === "no"){
+        //set lowercase to false
+        this.uppercase = false;
+        return;
+      }
+      //else the user did not enter a valid answer
+      else{
+        if(!window.confirm("Please answer with a yes or no.")){
+          this.uppercase = null;
+          return;
+        }
+      }
+    }
   }
 }
 
@@ -77,6 +112,11 @@ function generatePassword(){
 
   passwordInfo.setLowercase();
   if(passwordInfo.lowercase === null){
+    return password = "Password generation has been canceled";
+  }
+
+  passwordInfo.setUppercase();
+  if(passwordInfo.uppercase === null){
     return password = "Password generation has been canceled";
   }
 
