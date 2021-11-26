@@ -3,6 +3,7 @@ var passwordInfo = {
   length:"0",
   lowercase:"true",
   uppercase:"true",
+  numeric:"true",
   setLength(){
 
     //loop until input is either canceled or correctly inputed
@@ -81,13 +82,13 @@ var passwordInfo = {
 
       //else if user said yes
       else if (tempUpperCase.toLowerCase() === "yes"){
-        //set lowercase to true
+        //set uppercase to true
         this.uppercase = true;
         return;
       }
       //else if user said no
       else if (tempUpperCase.toLowerCase() === "no"){
-        //set lowercase to false
+        //set uppercase to false
         this.uppercase = false;
         return;
       }
@@ -95,6 +96,40 @@ var passwordInfo = {
       else{
         if(!window.confirm("Please answer with a yes or no.")){
           this.uppercase = null;
+          return;
+        }
+      }
+    }
+  },
+  setNumeric(){
+    //loop until input is either canceled or correctly inputed
+    while(true){
+          
+      var tempNumeric = window.prompt("Do you wish to include numbers in your password? Yes or No?");
+
+      //if user pressed cancel
+      if(tempNumeric === null){
+        //set length to null
+        this.numeric = null;
+        return;
+      }
+
+      //else if user said yes
+      else if (tempNumeric.toLowerCase() === "yes"){
+        //set numeric to true
+        this.numeric = true;
+        return;
+      }
+      //else if user said no
+      else if (tempNumeric.toLowerCase() === "no"){
+        //set numeric to false
+        this.numeric = false;
+        return;
+      }
+      //else the user did not enter a valid answer
+      else{
+        if(!window.confirm("Please answer with a yes or no.")){
+          this.numeric = null;
           return;
         }
       }
@@ -120,6 +155,10 @@ function generatePassword(){
     return password = "Password generation has been canceled";
   }
 
+  passwordInfo.setNumeric();
+  if(passwordInfo.numeric === null){
+    return password = "Password generation has been canceled";
+  }
   return password;
 
 }
