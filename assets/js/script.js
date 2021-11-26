@@ -9,7 +9,7 @@ var passwordInfo = {
 
     //loop until input is either canceled or correctly inputed
     while(true){
-      var tempLength = window.prompt("Please input the length of password you wish to generate");
+      var tempLength = window.prompt("Please input the length of password you wish to generate (must be between 8 and 128 characters)");
 
       //if user pressed cancel
       if(tempLength === null){
