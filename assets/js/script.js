@@ -174,9 +174,11 @@ var passwordInfo = {
 
 function randomizePassword(){
   
-  debugger;
+  //set temp variables
   var passwordCharacters = [];
   var randomizedPassword = null;
+
+  //check which criteria were selected
   if(passwordInfo.lowercase){
     passwordCharacters.push("a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z");
   }
@@ -190,6 +192,7 @@ function randomizePassword(){
     passwordCharacters.push("!","#","$","%","&","'","(",")","*","+","-",".","/",":",";","<","=",">","?","@","[","]","^","_","`","{","|","}","~");
   }
 
+  //iterate through the length of the password specified, randomizing and building password
   for(var i = 0; i < passwordInfo.length; i++){
     if(randomizedPassword === null)
     {
@@ -198,45 +201,59 @@ function randomizePassword(){
     else{
       randomizedPassword += passwordCharacters[Math.floor(Math.random() * passwordCharacters.length)]
     }
-    console.log(Math.floor(Math.random() * passwordCharacters.length));
   }
 
+  //return final password
   return randomizedPassword;
 }
 
 function generatePassword(){
+  
+  //set temp variables
   var password;
   var promptValidated = false;
+
+  //while at least one criteria hasn't been chosen
   while(promptValidated === false)
   {
+    //set length of password
     passwordInfo.setLength();
     if(passwordInfo.length === null){
       return password = "Password generation has been canceled";
     }
 
+    //set whether or not user wants lowercase in their password
     passwordInfo.setLowercase();
     if(passwordInfo.lowercase === null){
       return password = "Password generation has been canceled";
     }
 
+    //set whether or not user wants uppercase in their password
     passwordInfo.setUppercase();
     if(passwordInfo.uppercase === null){
       return password = "Password generation has been canceled";
     }
 
+    //set whether or not user wants numbers in their password
     passwordInfo.setNumeric();
     if(passwordInfo.numeric === null){
       return password = "Password generation has been canceled";
     }
 
+    //set whether or not user wants special characters in their password
     passwordInfo.setSpecialCharacters();
     if(passwordInfo.specialCharacters === null){
       return password = "Password generation has been canceled";
     }
 
+    //if the user said no to all the criteria
     if(passwordInfo.lowercase === false && passwordInfo.uppercase === false && passwordInfo.numeric === false && passwordInfo.specialCharacters === false){
-      window.alert("You must say yes to at least one prompt to generate password. Please try again!");
+      
+      //tell user they must select at least 1 criteria
+      window.alert("You must say yes to at least one criteria to generate password. Please try again!");
     }
+
+    //otherwise break out of the loop and create password based off criteria chosen
     else{
       promptValidated = true;
     }
