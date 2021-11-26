@@ -4,6 +4,7 @@ var passwordInfo = {
   lowercase:"true",
   uppercase:"true",
   numeric:"true",
+  specialCharacters ="true",
   setLength(){
 
     //loop until input is either canceled or correctly inputed
@@ -134,6 +135,40 @@ var passwordInfo = {
         }
       }
     }
+  },
+  setSpecialCharacters(){
+    //loop until input is either canceled or correctly inputed
+    while(true){
+          
+      var tempSpecialCharacters = window.prompt("Do you wish to include Special Characters in your password? Yes or No?");
+
+      //if user pressed cancel
+      if(tempSpecialCharacters === null){
+        //set length to null
+        this.specialCharacters = null;
+        return;
+      }
+
+      //else if user said yes
+      else if (tempSpecialCharacters.toLowerCase() === "yes"){
+        //set numeric to true
+        this.specialCharacters = true;
+        return;
+      }
+      //else if user said no
+      else if (tempSpecialCharacters.toLowerCase() === "no"){
+        //set numeric to false
+        this.specialCharacters = false;
+        return;
+      }
+      //else the user did not enter a valid answer
+      else{
+        if(!window.confirm("Please answer with a yes or no.")){
+          this.specialCharacters = null;
+          return;
+        }
+      }
+    }
   }
 }
 
@@ -159,6 +194,12 @@ function generatePassword(){
   if(passwordInfo.numeric === null){
     return password = "Password generation has been canceled";
   }
+
+  passwordInfo.setSpecialCharacters();
+  if(passwordInfo.specialCharacters === null){
+    return password = "Password generation has been canceled";
+  }
+
   return password;
 
 }
